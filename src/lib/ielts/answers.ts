@@ -18,8 +18,7 @@ const TFNG_ALIASES: Record<string, string> = {
 export function isCorrect(given: string | undefined, accepted: string[]): boolean {
   if (!given || !given.trim()) return false;
   let g = normalizeAnswer(given);
-  if (TFNG_ALIASES[g.replace(/\s/g, "")]) g = TFNG_ALIASES[g.replace(/\s/g, "")];
-  else if (TFNG_ALIASES[g]) g = TFNG_ALIASES[g];
+  g = TFNG_ALIASES[g.replace(/\s/g, "")] ?? TFNG_ALIASES[g] ?? g;
   return accepted.some((a) => normalizeAnswer(a) === g);
 }
 
