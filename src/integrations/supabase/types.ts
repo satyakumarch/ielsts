@@ -14,7 +14,207 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      mistakes: {
+        Row: {
+          category: string
+          correct_answer: string
+          created_at: string
+          explanation: string | null
+          id: string
+          question: string
+          question_type: string | null
+          skill: string
+          status: string
+          user_answer: string | null
+          user_id: string
+        }
+        Insert: {
+          category: string
+          correct_answer: string
+          created_at?: string
+          explanation?: string | null
+          id?: string
+          question: string
+          question_type?: string | null
+          skill: string
+          status?: string
+          user_answer?: string | null
+          user_id: string
+        }
+        Update: {
+          category?: string
+          correct_answer?: string
+          created_at?: string
+          explanation?: string | null
+          id?: string
+          question?: string
+          question_type?: string | null
+          skill?: string
+          status?: string
+          user_answer?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          current_band: number | null
+          daily_minutes: number | null
+          display_name: string | null
+          exam_type: string | null
+          goal: string | null
+          id: string
+          last_activity: Json | null
+          onboarded: boolean
+          preferred_language: string | null
+          schedule: string | null
+          target_band: number | null
+          test_date: string | null
+          updated_at: string
+          weak_skills: string[] | null
+        }
+        Insert: {
+          created_at?: string
+          current_band?: number | null
+          daily_minutes?: number | null
+          display_name?: string | null
+          exam_type?: string | null
+          goal?: string | null
+          id: string
+          last_activity?: Json | null
+          onboarded?: boolean
+          preferred_language?: string | null
+          schedule?: string | null
+          target_band?: number | null
+          test_date?: string | null
+          updated_at?: string
+          weak_skills?: string[] | null
+        }
+        Update: {
+          created_at?: string
+          current_band?: number | null
+          daily_minutes?: number | null
+          display_name?: string | null
+          exam_type?: string | null
+          goal?: string | null
+          id?: string
+          last_activity?: Json | null
+          onboarded?: boolean
+          preferred_language?: string | null
+          schedule?: string | null
+          target_band?: number | null
+          test_date?: string | null
+          updated_at?: string
+          weak_skills?: string[] | null
+        }
+        Relationships: []
+      }
+      reading_attempts: {
+        Row: {
+          answers: Json
+          band: number | null
+          by_type: Json
+          correct: number
+          created_at: string
+          id: string
+          mode: string
+          scope: string
+          seconds_spent: number
+          test_id: string
+          total: number
+          user_id: string
+        }
+        Insert: {
+          answers?: Json
+          band?: number | null
+          by_type?: Json
+          correct: number
+          created_at?: string
+          id?: string
+          mode: string
+          scope?: string
+          seconds_spent?: number
+          test_id: string
+          total: number
+          user_id: string
+        }
+        Update: {
+          answers?: Json
+          band?: number | null
+          by_type?: Json
+          correct?: number
+          created_at?: string
+          id?: string
+          mode?: string
+          scope?: string
+          seconds_spent?: number
+          test_id?: string
+          total?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      skill_scores: {
+        Row: {
+          band: number
+          created_at: string
+          id: string
+          skill: string
+          source: string
+          user_id: string
+        }
+        Insert: {
+          band: number
+          created_at?: string
+          id?: string
+          skill: string
+          source: string
+          user_id: string
+        }
+        Update: {
+          band?: number
+          created_at?: string
+          id?: string
+          skill?: string
+          source?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      study_tasks: {
+        Row: {
+          created_at: string
+          done: boolean
+          id: string
+          minutes: number
+          skill: string
+          task_date: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          done?: boolean
+          id?: string
+          minutes?: number
+          skill: string
+          task_date: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          done?: boolean
+          id?: string
+          minutes?: number
+          skill?: string
+          task_date?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
