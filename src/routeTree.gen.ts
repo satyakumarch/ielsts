@@ -13,9 +13,15 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedCalculatorRouteImport } from './routes/_authenticated/calculator'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedMistakesRouteImport } from './routes/_authenticated/mistakes'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedStudyPlanRouteImport } from './routes/_authenticated/study-plan'
 import { Route as AuthenticatedReadingIndexRouteImport } from './routes/_authenticated/reading.index'
+import { Route as AuthenticatedReadingTestIdRouteImport } from './routes/_authenticated/reading.$testId'
+import { Route as AuthenticatedSoonSectionRouteImport } from './routes/_authenticated/soon.$section'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -36,14 +42,34 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedCalculatorRoute = AuthenticatedCalculatorRouteImport.update({
+  id: '/calculator',
+  path: '/calculator',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedMistakesRoute = AuthenticatedMistakesRouteImport.update({
+  id: '/mistakes',
+  path: '/mistakes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedStudyPlanRoute = AuthenticatedStudyPlanRouteImport.update({
+  id: '/study-plan',
+  path: '/study-plan',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedReadingIndexRoute =
@@ -52,21 +78,45 @@ const AuthenticatedReadingIndexRoute =
     path: '/reading/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedReadingTestIdRoute =
+  AuthenticatedReadingTestIdRouteImport.update({
+    id: '/reading/$testId',
+    path: '/reading/$testId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSoonSectionRoute =
+  AuthenticatedSoonSectionRouteImport.update({
+    id: '/soon/$section',
+    path: '/soon/$section',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/calculator': typeof AuthenticatedCalculatorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/mistakes': typeof AuthenticatedMistakesRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/study-plan': typeof AuthenticatedStudyPlanRoute
+  '/reading/$testId': typeof AuthenticatedReadingTestIdRoute
+  '/soon/$section': typeof AuthenticatedSoonSectionRoute
   '/reading/': typeof AuthenticatedReadingIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/calculator': typeof AuthenticatedCalculatorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/mistakes': typeof AuthenticatedMistakesRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/study-plan': typeof AuthenticatedStudyPlanRoute
+  '/reading/$testId': typeof AuthenticatedReadingTestIdRoute
+  '/soon/$section': typeof AuthenticatedSoonSectionRoute
   '/reading': typeof AuthenticatedReadingIndexRoute
 }
 export interface FileRoutesById {
@@ -75,8 +125,14 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/calculator': typeof AuthenticatedCalculatorRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/mistakes': typeof AuthenticatedMistakesRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/study-plan': typeof AuthenticatedStudyPlanRoute
+  '/_authenticated/reading/$testId': typeof AuthenticatedReadingTestIdRoute
+  '/_authenticated/soon/$section': typeof AuthenticatedSoonSectionRoute
   '/_authenticated/reading/': typeof AuthenticatedReadingIndexRoute
 }
 export interface FileRouteTypes {
@@ -85,16 +141,28 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/reset-password'
+    | '/calculator'
     | '/dashboard'
+    | '/mistakes'
     | '/onboarding'
+    | '/settings'
+    | '/study-plan'
+    | '/reading/$testId'
+    | '/soon/$section'
     | '/reading/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/reset-password'
+    | '/calculator'
     | '/dashboard'
+    | '/mistakes'
     | '/onboarding'
+    | '/settings'
+    | '/study-plan'
+    | '/reading/$testId'
+    | '/soon/$section'
     | '/reading'
   id:
     | '__root__'
@@ -102,8 +170,14 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/reset-password'
+    | '/_authenticated/calculator'
     | '/_authenticated/dashboard'
+    | '/_authenticated/mistakes'
     | '/_authenticated/onboarding'
+    | '/_authenticated/settings'
+    | '/_authenticated/study-plan'
+    | '/_authenticated/reading/$testId'
+    | '/_authenticated/soon/$section'
     | '/_authenticated/reading/'
   fileRoutesById: FileRoutesById
 }
@@ -144,11 +218,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/calculator': {
+      id: '/_authenticated/calculator'
+      path: '/calculator'
+      fullPath: '/calculator'
+      preLoaderRoute: typeof AuthenticatedCalculatorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/mistakes': {
+      id: '/_authenticated/mistakes'
+      path: '/mistakes'
+      fullPath: '/mistakes'
+      preLoaderRoute: typeof AuthenticatedMistakesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/onboarding': {
@@ -158,6 +246,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/study-plan': {
+      id: '/_authenticated/study-plan'
+      path: '/study-plan'
+      fullPath: '/study-plan'
+      preLoaderRoute: typeof AuthenticatedStudyPlanRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/reading/': {
       id: '/_authenticated/reading/'
       path: '/reading'
@@ -165,18 +267,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedReadingIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/reading/$testId': {
+      id: '/_authenticated/reading/$testId'
+      path: '/reading/$testId'
+      fullPath: '/reading/$testId'
+      preLoaderRoute: typeof AuthenticatedReadingTestIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/soon/$section': {
+      id: '/_authenticated/soon/$section'
+      path: '/soon/$section'
+      fullPath: '/soon/$section'
+      preLoaderRoute: typeof AuthenticatedSoonSectionRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCalculatorRoute: typeof AuthenticatedCalculatorRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedMistakesRoute: typeof AuthenticatedMistakesRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedStudyPlanRoute: typeof AuthenticatedStudyPlanRoute
+  AuthenticatedReadingTestIdRoute: typeof AuthenticatedReadingTestIdRoute
+  AuthenticatedSoonSectionRoute: typeof AuthenticatedSoonSectionRoute
   AuthenticatedReadingIndexRoute: typeof AuthenticatedReadingIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCalculatorRoute: AuthenticatedCalculatorRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedMistakesRoute: AuthenticatedMistakesRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedStudyPlanRoute: AuthenticatedStudyPlanRoute,
+  AuthenticatedReadingTestIdRoute: AuthenticatedReadingTestIdRoute,
+  AuthenticatedSoonSectionRoute: AuthenticatedSoonSectionRoute,
   AuthenticatedReadingIndexRoute: AuthenticatedReadingIndexRoute,
 }
 
