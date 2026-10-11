@@ -81,11 +81,11 @@ export function buildWeekPlan(opts: { weak: string[]; dailyMinutes: number; star
     const date = new Date(start);
     date.setDate(start.getDate() + d);
     const iso = date.toISOString().slice(0, 10);
-    const primary = rotation[d % rotation.length];
-    const secondary = rotation[(d + 1) % rotation.length];
+    const primary = rotation[d % rotation.length]!;
+    const secondary = rotation[(d + 1) % rotation.length]!;
     const main = Math.round(opts.dailyMinutes * 0.65);
-    tasks.push({ task_date: iso, skill: primary, title: ideas[primary][d % 3], minutes: main });
-    tasks.push({ task_date: iso, skill: secondary, title: ideas[secondary][(d + 1) % 3], minutes: opts.dailyMinutes - main });
+    tasks.push({ task_date: iso, skill: primary, title: ideas[primary]![d % 3]!, minutes: main });
+    tasks.push({ task_date: iso, skill: secondary, title: ideas[secondary]![(d + 1) % 3]!, minutes: opts.dailyMinutes - main });
     tasks.push({ task_date: iso, skill: "vocabulary", title: "Review 15 academic words", minutes: 10 });
   }
   return tasks;

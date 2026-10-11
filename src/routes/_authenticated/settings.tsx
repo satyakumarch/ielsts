@@ -37,7 +37,7 @@ function SettingsPage() {
   async function save() {
     const id = await uid();
     const { error } = await supabase.from("profiles").update({ display_name: name, target_band: target, test_date: date || null, daily_minutes: daily }).eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: profileQuery.queryKey });
     toast.success("Saved");
   }

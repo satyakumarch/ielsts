@@ -30,14 +30,14 @@ function Onboarding() {
   const [target, setTarget] = useState(7);
   const [testDate, setTestDate] = useState("");
   const [daily, setDaily] = useState(60);
-  const [self, setSelf] = useState<Record<string, number>>({ listening: 5.5, writing: 5.5, speaking: 5.5 });
+  const [self, setSelf] = useState<Record<"listening" | "writing" | "speaking", number>>({ listening: 5.5, writing: 5.5, speaking: 5.5 });
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [busy, setBusy] = useState(false);
   const navigate = useNavigate();
   const qc = useQueryClient();
 
-  const test = READING_TESTS[0];
-  const passage = test.passages[0];
+  const test = READING_TESTS[0]!;
+  const passage = test.passages[0]!;
   const diag = useMemo(() => allQuestions(test, passage.id).slice(0, 8), [test, passage.id]);
 
   async function finish() {
@@ -48,7 +48,7 @@ function Onboarding() {
       // Scale 8 diagnostic questions to an estimate (rough, labelled as such).
       const readingBand = roundToHalfBand(Math.min(9, 3 + (correct / diag.length) * 5));
       const weak = [...SKILLS]
-        .map((s) => ({ s, b: s === "reading" ? readingBand : self[s] }))
+        .map((s) => ({ s, b: s === "reading" ? readingBand : self[s as "listening"] }))
         .sort((a, b) => a.b - b.b)
         .slice(0, 2)
         .map((x) => x.s);

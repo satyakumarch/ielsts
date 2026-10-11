@@ -13,7 +13,7 @@ import { uid } from "@/lib/ielts/data";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/reading/$testId")({
-  validateSearch: (s: Record<string, unknown>) => ({ scope: typeof s.scope === "string" ? s.scope : "full" }),
+  validateSearch: (s: Record<string, unknown>) => ({ scope: typeof s["scope"] === "string" ? s["scope"] : "full" }),
   loader: ({ params }) => {
     const test = getTest(params.testId);
     if (!test) throw notFound();
@@ -38,7 +38,7 @@ function TestPage() {
   const qc = useQueryClient();
 
   useEffect(() => {
-    if (submitted) return;
+    if (submitted) return undefined;
     const t = setInterval(() => setLeft((l) => Math.max(0, l - 1)), 1000);
     return () => clearInterval(t);
   }, [submitted]);
@@ -73,9 +73,9 @@ function TestPage() {
       const user_id = await uid();
       const byType: Record<string, { correct: number; total: number }> = {};
       for (const q of questions) {
-        byType[q.type] ??= { correct: 0, total: 0 };
-        byType[q.type].total++;
-        if (isCorrect(answers[q.n], q.answers)) byType[q.type].correct++;
+        const r = (byType[q.type] ??= { correct: 0, total: 0 });
+        r.total++;
+        if (isCorrect(answers[q.n], q.answers)) r.correct++;
       }
       const { error } = await supabase.from("reading_attempts").insert({
         user_id, test_id: test.id, scope, mode: "practice", answers, by_type: byType,
@@ -86,7 +86,7 @@ function TestPage() {
       if (wrong.length) {
         await supabase.from("mistakes").insert(wrong.map((q) => ({
           user_id, skill: "reading", category: QTYPE_LABEL[q.type], question_type: q.type,
-          question: q.prompt, user_answer: answers[q.n] || null, correct_answer: q.answers[0], explanation: q.explanation,
+          question: q.prompt, user_answer: answers[q.n] || null, correct_answer: q.answers[0] ?? "", explanation: q.explanation,
         })));
       }
       await supabase.from("skill_scores").insert({ user_id, skill: "reading", band, source: "reading-test" });
@@ -102,7 +102,7 @@ function TestPage() {
 
   const mm = String(Math.floor(left / 60)).padStart(2, "0");
   const ss = String(left % 60).padStart(2, "0");
-  const passage = passages[active];
+  const passage = passages[active] ?? passages[0]!;
 
   if (submitted) {
     const byType = new Map<string, { c: number; t: number }>();
