@@ -36,7 +36,3 @@ export function FeedbackCard({ f }: { f: Feedback }) {
     </div>
   );
 }
-
-export function useCountdown() {
-  return null;
-}

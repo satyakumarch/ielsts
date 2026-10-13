@@ -53,6 +53,25 @@ export const tasksQuery = queryOptions({
   },
 });
 
+export const submissionsQuery = (skill: string) =>
+  queryOptions({
+    queryKey: ["practice_submissions", skill],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("practice_submissions").select("*").eq("skill", skill).order("created_at", { ascending: false });
+      if (error) throw error;
+      return data;
+    },
+  });
+
+export const vocabQuery = queryOptions({
+  queryKey: ["vocab_progress"],
+  queryFn: async () => {
+    const { data, error } = await supabase.from("vocab_progress").select("*");
+    if (error) throw error;
+    return data;
+  },
+});
+
 export { uid };
 
 export const SKILLS = ["reading", "listening", "writing", "speaking"] as const;
