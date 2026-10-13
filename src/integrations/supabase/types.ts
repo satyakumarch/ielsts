@@ -56,6 +56,39 @@ export type Database = {
         }
         Relationships: []
       }
+      practice_submissions: {
+        Row: {
+          band: number | null
+          created_at: string
+          feedback: Json
+          id: string
+          prompt: string
+          response: string
+          skill: string
+          user_id: string
+        }
+        Insert: {
+          band?: number | null
+          created_at?: string
+          feedback?: Json
+          id?: string
+          prompt: string
+          response: string
+          skill: string
+          user_id: string
+        }
+        Update: {
+          band?: number | null
+          created_at?: string
+          feedback?: Json
+          id?: string
+          prompt?: string
+          response?: string
+          skill?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -212,6 +245,33 @@ export type Database = {
           task_date?: string
           title?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      vocab_progress: {
+        Row: {
+          box: number
+          due_at: string
+          id: string
+          updated_at: string
+          user_id: string
+          word: string
+        }
+        Insert: {
+          box?: number
+          due_at?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+          word: string
+        }
+        Update: {
+          box?: number
+          due_at?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+          word?: string
         }
         Relationships: []
       }
