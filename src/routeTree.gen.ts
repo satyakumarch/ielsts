@@ -15,13 +15,14 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedCalculatorRouteImport } from './routes/_authenticated/calculator'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedListeningRouteImport } from './routes/_authenticated/listening'
 import { Route as AuthenticatedMistakesRouteImport } from './routes/_authenticated/mistakes'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedStudyPlanRouteImport } from './routes/_authenticated/study-plan'
+import { Route as AuthenticatedWritingRouteImport } from './routes/_authenticated/writing'
 import { Route as AuthenticatedReadingIndexRouteImport } from './routes/_authenticated/reading.index'
 import { Route as AuthenticatedReadingTestIdRouteImport } from './routes/_authenticated/reading.$testId'
-import { Route as AuthenticatedSoonSectionRouteImport } from './routes/_authenticated/soon.$section'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedListeningRoute = AuthenticatedListeningRouteImport.update({
+  id: '/listening',
+  path: '/listening',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedMistakesRoute = AuthenticatedMistakesRouteImport.update({
   id: '/mistakes',
   path: '/mistakes',
@@ -72,6 +78,11 @@ const AuthenticatedStudyPlanRoute = AuthenticatedStudyPlanRouteImport.update({
   path: '/study-plan',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedWritingRoute = AuthenticatedWritingRouteImport.update({
+  id: '/writing',
+  path: '/writing',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedReadingIndexRoute =
   AuthenticatedReadingIndexRouteImport.update({
     id: '/reading/',
@@ -84,12 +95,6 @@ const AuthenticatedReadingTestIdRoute =
     path: '/reading/$testId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedSoonSectionRoute =
-  AuthenticatedSoonSectionRouteImport.update({
-    id: '/soon/$section',
-    path: '/soon/$section',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -97,12 +102,13 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/calculator': typeof AuthenticatedCalculatorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/listening': typeof AuthenticatedListeningRoute
   '/mistakes': typeof AuthenticatedMistakesRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/study-plan': typeof AuthenticatedStudyPlanRoute
+  '/writing': typeof AuthenticatedWritingRoute
   '/reading/$testId': typeof AuthenticatedReadingTestIdRoute
-  '/soon/$section': typeof AuthenticatedSoonSectionRoute
   '/reading/': typeof AuthenticatedReadingIndexRoute
 }
 export interface FileRoutesByTo {
@@ -111,12 +117,13 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/calculator': typeof AuthenticatedCalculatorRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/listening': typeof AuthenticatedListeningRoute
   '/mistakes': typeof AuthenticatedMistakesRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/study-plan': typeof AuthenticatedStudyPlanRoute
+  '/writing': typeof AuthenticatedWritingRoute
   '/reading/$testId': typeof AuthenticatedReadingTestIdRoute
-  '/soon/$section': typeof AuthenticatedSoonSectionRoute
   '/reading': typeof AuthenticatedReadingIndexRoute
 }
 export interface FileRoutesById {
@@ -127,12 +134,13 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/calculator': typeof AuthenticatedCalculatorRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/listening': typeof AuthenticatedListeningRoute
   '/_authenticated/mistakes': typeof AuthenticatedMistakesRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/study-plan': typeof AuthenticatedStudyPlanRoute
+  '/_authenticated/writing': typeof AuthenticatedWritingRoute
   '/_authenticated/reading/$testId': typeof AuthenticatedReadingTestIdRoute
-  '/_authenticated/soon/$section': typeof AuthenticatedSoonSectionRoute
   '/_authenticated/reading/': typeof AuthenticatedReadingIndexRoute
 }
 export interface FileRouteTypes {
@@ -143,12 +151,13 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/calculator'
     | '/dashboard'
+    | '/listening'
     | '/mistakes'
     | '/onboarding'
     | '/settings'
     | '/study-plan'
+    | '/writing'
     | '/reading/$testId'
-    | '/soon/$section'
     | '/reading/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -157,12 +166,13 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/calculator'
     | '/dashboard'
+    | '/listening'
     | '/mistakes'
     | '/onboarding'
     | '/settings'
     | '/study-plan'
+    | '/writing'
     | '/reading/$testId'
-    | '/soon/$section'
     | '/reading'
   id:
     | '__root__'
@@ -172,12 +182,13 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/_authenticated/calculator'
     | '/_authenticated/dashboard'
+    | '/_authenticated/listening'
     | '/_authenticated/mistakes'
     | '/_authenticated/onboarding'
     | '/_authenticated/settings'
     | '/_authenticated/study-plan'
+    | '/_authenticated/writing'
     | '/_authenticated/reading/$testId'
-    | '/_authenticated/soon/$section'
     | '/_authenticated/reading/'
   fileRoutesById: FileRoutesById
 }
@@ -232,6 +243,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/listening': {
+      id: '/_authenticated/listening'
+      path: '/listening'
+      fullPath: '/listening'
+      preLoaderRoute: typeof AuthenticatedListeningRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/mistakes': {
       id: '/_authenticated/mistakes'
       path: '/mistakes'
@@ -260,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedStudyPlanRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/writing': {
+      id: '/_authenticated/writing'
+      path: '/writing'
+      fullPath: '/writing'
+      preLoaderRoute: typeof AuthenticatedWritingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/reading/': {
       id: '/_authenticated/reading/'
       path: '/reading'
@@ -274,37 +299,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedReadingTestIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/soon/$section': {
-      id: '/_authenticated/soon/$section'
-      path: '/soon/$section'
-      fullPath: '/soon/$section'
-      preLoaderRoute: typeof AuthenticatedSoonSectionRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCalculatorRoute: typeof AuthenticatedCalculatorRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedListeningRoute: typeof AuthenticatedListeningRoute
   AuthenticatedMistakesRoute: typeof AuthenticatedMistakesRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedStudyPlanRoute: typeof AuthenticatedStudyPlanRoute
+  AuthenticatedWritingRoute: typeof AuthenticatedWritingRoute
   AuthenticatedReadingTestIdRoute: typeof AuthenticatedReadingTestIdRoute
-  AuthenticatedSoonSectionRoute: typeof AuthenticatedSoonSectionRoute
   AuthenticatedReadingIndexRoute: typeof AuthenticatedReadingIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCalculatorRoute: AuthenticatedCalculatorRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedListeningRoute: AuthenticatedListeningRoute,
   AuthenticatedMistakesRoute: AuthenticatedMistakesRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedStudyPlanRoute: AuthenticatedStudyPlanRoute,
+  AuthenticatedWritingRoute: AuthenticatedWritingRoute,
   AuthenticatedReadingTestIdRoute: AuthenticatedReadingTestIdRoute,
-  AuthenticatedSoonSectionRoute: AuthenticatedSoonSectionRoute,
   AuthenticatedReadingIndexRoute: AuthenticatedReadingIndexRoute,
 }
 

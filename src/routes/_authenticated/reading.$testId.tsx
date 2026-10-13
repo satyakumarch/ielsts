@@ -49,7 +49,10 @@ function TestPage() {
 
   function highlight() {
     const sel = window.getSelection();
-    if (!sel || sel.isCollapsed || !articleRef.current?.contains(sel.anchorNode)) return toast("Select text in the passage first");
+    if (!sel || sel.isCollapsed || !articleRef.current?.contains(sel.anchorNode)) {
+      toast("Select text in the passage first");
+      return;
+    }
     try {
       const mark = document.createElement("mark");
       mark.className = "hl";
