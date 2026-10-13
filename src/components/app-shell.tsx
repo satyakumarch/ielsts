@@ -15,15 +15,11 @@ type Item = { label: string; icon: typeof BookOpen; to: string; params?: Record<
 const NAV: Item[] = [
   { label: "Dashboard", icon: LayoutDashboard, to: "/dashboard" },
   { label: "Reading", icon: BookOpen, to: "/reading" },
-  { label: "Listening", icon: Headphones, to: "/soon/$section", params: { section: "listening" }, soon: true },
-  { label: "Writing", icon: PenLine, to: "/soon/$section", params: { section: "writing" }, soon: true },
-  { label: "Speaking", icon: Mic, to: "/soon/$section", params: { section: "speaking" }, soon: true },
-  { label: "Vocabulary", icon: Library, to: "/soon/$section", params: { section: "vocabulary" }, soon: true },
-  { label: "Mock tests", icon: ClipboardList, to: "/soon/$section", params: { section: "mock-tests" }, soon: true },
+  { label: "Listening", icon: Headphones, to: "/listening" },
+  { label: "Writing", icon: PenLine, to: "/writing" },
   { label: "Mistake notebook", icon: NotebookPen, to: "/mistakes" },
   { label: "Band calculator", icon: Calculator, to: "/calculator" },
   { label: "Study plan", icon: CalendarCheck, to: "/study-plan" },
-  { label: "AI tutor", icon: Bot, to: "/soon/$section", params: { section: "ai-tutor" }, soon: true },
   { label: "Settings", icon: Settings, to: "/settings" },
 ];
 
