@@ -30,9 +30,9 @@ function Listening() {
 
   function play(id: string, script: string) {
     const synth = window.speechSynthesis;
-    if (!synth) return toast.error("Your browser can't play audio for this test. Try Chrome or Edge.");
+    if (!synth) { toast.error("Your browser can't play audio for this test. Try Chrome or Edge."); return; }
     if (playing) { synth.cancel(); setPlaying(null); return; }
-    if ((plays[id] ?? 0) >= 1) return toast("In the real test you hear the audio once only.");
+    if ((plays[id] ?? 0) >= 1) { toast("In the real test you hear the audio once only."); return; }
     const u = new SpeechSynthesisUtterance(script);
     u.lang = "en-GB"; u.rate = 0.95;
     u.onend = () => setPlaying(null);
