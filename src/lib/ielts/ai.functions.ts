@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
-const MODEL = "google/gemini-3-flash-preview";
+const MODEL = "openai/gpt-6-astra";
 
 async function callAI(messages: { role: string; content: string }[], json: boolean) {
   const key = process.env.LOVABLE_API_KEY;
@@ -9,7 +9,7 @@ async function callAI(messages: { role: string; content: string }[], json: boole
   const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ model: MODEL, messages, ...(json ? { response_format: { type: "json_object" } } : {}) }),
+    body: JSON.stringify({ model: MODEL, messages, reasoning_effort: "low", ...(json ? { response_format: { type: "json_object" } } : {}) }),
   });
   if (res.status === 429) throw new Error("Too many AI requests right now — please wait a minute and try again.");
   if (res.status === 402) throw new Error("AI credits have run out. Please add credits to keep using AI feedback.");
